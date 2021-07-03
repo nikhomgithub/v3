@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/home/static/css/main.422d9ab5.chunk.css",
+    "main.js": "/home/static/js/main.1e54d982.chunk.js",
+    "main.js.map": "/home/static/js/main.1e54d982.chunk.js.map",
+    "runtime-main.js": "/home/static/js/runtime-main.a622eb0f.js",
+    "runtime-main.js.map": "/home/static/js/runtime-main.a622eb0f.js.map",
+    "static/js/2.e0643357.chunk.js": "/home/static/js/2.e0643357.chunk.js",
+    "static/js/2.e0643357.chunk.js.map": "/home/static/js/2.e0643357.chunk.js.map",
+    "index.html": "/home/index.html",
+    "precache-manifest.f941fb75957293538bb032422551304c.js": "/home/precache-manifest.f941fb75957293538bb032422551304c.js",
+    "service-worker.js": "/home/service-worker.js",
+    "static/css/main.422d9ab5.chunk.css.map": "/home/static/css/main.422d9ab5.chunk.css.map",
+    "static/js/2.e0643357.chunk.js.LICENSE.txt": "/home/static/js/2.e0643357.chunk.js.LICENSE.txt",
+    "static/media/App2.css": "/home/static/media/icecream.96feb646.jpg",
+    "static/media/Home.css": "/home/static/media/waterfall.e379c494.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a622eb0f.js",
+    "static/js/2.e0643357.chunk.js",
+    "static/css/main.422d9ab5.chunk.css",
+    "static/js/main.1e54d982.chunk.js"
+  ]
+}
