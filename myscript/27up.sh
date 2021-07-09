@@ -11,10 +11,10 @@ cd ~/Documents/Homework4/v3/server_27
 echo "nikhom" | sudo docker-compose up -d
 
 cd ~/Documents/Homework4/v3/nginx
+echo "nikhom" | sudo docker-compose up -d
+
+cd ~/Documents/Homework4/v3/server_27
+echo "nikhom" | sudo docker-compose down
+
+cd ~/Documents/Homework4/v3/server_27
 echo "nikhom" | sudo docker-compose up
-
-#cd ~/Documents/Homework4/v3/server_27
-#echo "nikhom" | sudo docker-compose down
-
-#cd ~/Documents/Homework4/v3/server_27
-#echo "nikhom" | sudo docker-compose up

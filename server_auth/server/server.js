@@ -8,10 +8,21 @@ const mongoose = require('mongoose');
 const server = http.createServer(app);
 
 //let db="mongodb+srv://nikhom123:meemee@cluster0-7ll9a.gcp.mongodb.net/vrp13?retryWrites=true";
-
 //if(process.env.MONGO_URI){ db=process.env.MONGO_URI}
 
 const  db=process.env.MONGO_URI
+
+mongoose
+  .connect(
+    db,
+    { useCreateIndex: true,
+      useNewUrlParser: true ,
+      useUnifiedTopology: true
+    }
+  )
+  .then(() => console.log('MongoDB_URI Connected'))
+  .catch(err => console.log(err));
+
 
 const port=process.env.PORT;
 //const port = process.env.PORT||3001;

@@ -11,12 +11,20 @@ const { createTableTemplate } = require('./ctUtil');
 
 const shopsignup= async (req,res,next)=>{
     //console.log(req.body)
-    const {authConnection} = require('../modals/AuthConnection');
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         const { shopName,password, ownerName,ownerPassword, ownerEmail,
-                ...remainigkeys}=req.body;
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
+            ...remainigkeys}=req.body;
+
         let newShop=new Data (req.body);
 
         if(!shopName){throw {message:"Enter shopName"}}
@@ -50,12 +58,21 @@ const shopsignup= async (req,res,next)=>{
 
 //---------------------
 const shoplogin= async (req,res,next)=>{
-
-    const {authConnection} = require('../modals/AuthConnection');
-    const Data=require(req.modal).Shop;
-
+    console.log('shoplogin')
     try {
-        //const {Shop} = require('../modals/Auth')
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+
+        if(process.env.AUTH_CONNECTION=="true"){
+            console.log('auth conection = true...')
+            Data=require('../modals/Auth').Shop;
+        }else{
+            console.log('auth connection = false...')
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         const {shopName,password}=req.body
 
         if(!shopName){throw {message:"Enter shopName"}}
@@ -84,11 +101,18 @@ const shoplogin= async (req,res,next)=>{
 }
 //---------------------
 const ownerlogin= async (req,res,next)=>{
-    const {authConnection} = require('../modals/AuthConnection');
 
     try{
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         const {ownerName,ownerPassword}=req.body
 
         //console.log('1')
@@ -118,9 +142,18 @@ const ownerlogin= async (req,res,next)=>{
 }
 //-----------------------------------
 const shopchangepassword=async (req,res,next)=>{
-    const {authConnection} = require('../modals/AuthConnection');
 
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         const {shopName,password,newPassword1,newPassword2}=req.body;
         //console.log(req.body)
         //Simple validation
@@ -133,9 +166,6 @@ const shopchangepassword=async (req,res,next)=>{
         if(newPassword1!=newPassword2)
         { throw {message:'Recheck new password'}}
                 
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
-
         //let finalresult={}
         const result=await Data.findOne({shopName}).lean()
         if(!result) { throw {message:'Invalid shop name'}};
@@ -162,9 +192,17 @@ const shopchangepassword=async (req,res,next)=>{
 //----------------------------------
 //post=>localhost:3001/*/ownerchangepassword
 const ownerchangepassword=async (req,res,next)=>{
-    const {authConnection} = require('../modals/AuthConnection');
-
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         const {ownerName,ownerPassword,newOwnerPassword1,newOwnerPassword2}=req.body;
 
         if(!ownerName){throw {message:"Enter ownerName"}}
@@ -177,9 +215,6 @@ const ownerchangepassword=async (req,res,next)=>{
         //check new password and confirmed new password
         if(newOwnerPassword1!=newOwnerPassword2)
         { throw {message:'Recheck new password'}}
-        
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
 
         //let finalresult={}
         const result=await Data.findOne({ownerName}).lean()
@@ -205,20 +240,25 @@ const ownerchangepassword=async (req,res,next)=>{
 //---------------------------
 const getshop=async(req,res,next)=>{
     //no shopId is required
-    const {authConnection} = require('../modals/AuthConnection');
-
     let {sort,confirm_password,...remaining}=req.body
     if(!sort){ sort={dateIn:1} }
     const qryObject={...remaining}
     try{
-        
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
         {return res.status(400).json("invalid confirm_password") }
-
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
 
         const count = Data.find(qryObject).lean().countDocuments()
         const lastRecord = Data.findOne({}).sort({dateIn:-1})
@@ -245,7 +285,6 @@ const getshop=async(req,res,next)=>{
 //--------------------------
 const getlimitshop=async(req,res,next)=>{
     //no shopId is required
-    const {authConnection} = require('../modals/AuthConnection');
 
     let {pageNumber,sort,limitRow,confirm_password,...remaining}=req.body
     
@@ -258,13 +297,20 @@ const getlimitshop=async(req,res,next)=>{
 
     if(!sort){ sort={dateIn:1} }
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
         {return res.status(400).json("invalid confirm_password") }
-
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
 
         const count = Data.find({...remaining}).lean().countDocuments()
         const lastRecord = Data.findOne({}).sort({dateIn:-1})
@@ -293,17 +339,22 @@ const deleteshop=async(req,res,next)=>{
     //no shopId is required
     const {shopName,confirm_password}=req.body
     const qryObject={shopName}
-    const {authConnection} = require('../modals/AuthConnection');
 
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
         {return res.status(400).json("invalid confirm_password") }
-
-
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
 
         const resDelete = await Data.deleteMany(qryObject)
         
@@ -322,9 +373,16 @@ const updateshop=async(req,res,next)=>{
                ownerName,ownerPassword,confirm_password,
            ...remaining}=req.body
     
-    const {authConnection} = require('../modals/AuthConnection');
-
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
 
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
@@ -338,9 +396,6 @@ const updateshop=async(req,res,next)=>{
     
         const qryObject={shopName}
         let dataTosave={...remaining}
-    
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).Shop;
 
         const resUpdate=await Data.updateOne(
             qryObject,
@@ -366,14 +421,19 @@ const login= async (req,res,next)=>{
     //console.log(shopId)
     const {username,password}=req.body;
 
-    const {authConnection} = require('../modals/AuthConnection');
-
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
+
         if(!username){ throw {message:"Enter username"} }
         if(!password){ throw {message:"Enter password"} }
-
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).User;
 
         const resultFind=await Data.findOne({username,shopId}).lean()
         if(!resultFind) {throw {message:'Invalid username'} }
@@ -402,9 +462,18 @@ const login= async (req,res,next)=>{
 const changepassword=async (req,res,next)=>{
     //console.log('change password')
     //console.log(req.body)
-    const {authConnection} = require('../modals/AuthConnection');
 
     try{
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
 
         const shopId=req.shopId
         const {username,password,newPassword1,newPassword2}=req.body;
@@ -418,9 +487,6 @@ const changepassword=async (req,res,next)=>{
         //check new password and confirmed new password
         if(newPassword1!=newPassword2){ throw {message:'Recheck new password'}}
         
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).User;
-
         //let finalresult={}
         const result=await Data.findOne({username,shopId}).lean()
         if(!result) { throw {message:'Invalid username'} };
@@ -449,16 +515,20 @@ const adduser= async (req,res,next)=>{
 
     const shopId=req.shopId
     const { id,username,password,
-            userLevel }=req.body;
-
-    const {authConnection} = require('../modals/AuthConnection');
-
-    //const {Shop} = require('../modals/Auth')
-    const Data=require(req.modal).User;
-    //console.log(req.headers)           
-    let newUser=new Data ({...req.body,shopId});
+            userLevel }=req.body;         
 
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
+        let newUser=new Data ({...req.body,shopId});
+
         if(!username){throw {message:"Enter userame"} }
         if(!password){throw {message:"Enter password"} }
         if(!id){throw {message:"Enter id"} }
@@ -495,21 +565,35 @@ const adduser= async (req,res,next)=>{
 const shopinit= async (req,res,next)=>{
     //console.log('1')
     //console.log(req.routeAddress)
-    console.log('shopinit')
-    const {authConnection} = require('../modals/AuthConnection');
-
+    //console.log('shopinit')
+    //console.log(process.env.AUTH_CONNECTION=="true")
     const {shopName,password,confirm_password}=req.body
     try{
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            console.log('1')
+            Data=require('../modals/Auth').Shop;
+
+        }else{
+            console.log('2')
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
+        //console.log('3')
         if(!shopName){throw {message:"Enter shopName"}}
         
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
         {return res.status(400).json("invalid confirm_password") }
-    
+        //console.log('4')
+
         //let result = null
-          const {Shop} = require('../modals/Auth')
-          let newData=new Shop({...req.initData});
+          let newData=new Data({...req.initData});
+
           if(req.initData.password){
               const hash_password=await bcrypt.hash(req.initData.password,10)
               newData.password=hash_password;
@@ -518,8 +602,11 @@ const shopinit= async (req,res,next)=>{
               const owner_hash_password=await bcrypt.hash(req.initData.ownerPassword,10)
               newData.ownerPassword=owner_hash_password;
           }
-          const resDelete = await Shop.deleteMany({shopName})
-  
+          //console.log('5')
+
+          const resDelete = await Data.deleteMany({shopName})
+          //console.log('6')
+
           const result=await newData.save()
           //console.log('4')
           //authConnection.close()
@@ -534,10 +621,18 @@ const shopinit= async (req,res,next)=>{
   
   //get=>localhost:3001/*/restore
   const shoprestore=async(req,res,next)=>{
-      const {authConnection} = require('../modals/AuthConnection');
 
-      const {shopName,password,filePath,confirm_password}=req.body
+    const {shopName,password,filePath,confirm_password}=req.body
       try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
 
           if(!shopName){throw {message:"Enter shopName"}}
           if(!filePath){throw {message:"Enter filePath"}}
@@ -547,9 +642,6 @@ const shopinit= async (req,res,next)=>{
           if(confirm_password!==process.env.CONFIRM_PASSWORD)
            {return res.status(400).json("invalid confirm_password") }
     
-          const {Shop,User}=require('../modals/Auth'); 
-          const Data=require(req.modal);
-      
           const restoreData = require(`../data/${filePath}`)
   
           if(!restoreData){throw {message:"Invalid file"} }
@@ -559,8 +651,8 @@ const shopinit= async (req,res,next)=>{
           //console.log(restoreData.table)
           if(Array.isArray(restoreData.table)){
 
-            const resDelete = await Shop.deleteMany({shopName})      
-            const result=await Shop.create(restoreData.table)
+            const resDelete = await Data.deleteMany({shopName})      
+            const result=await Data.create(restoreData.table)
             
             //authConnection.close()
             return res.status(200).json({message:"restore Shop succesfully"})
@@ -580,8 +672,17 @@ const shopinit= async (req,res,next)=>{
   //all backup to file
   const shopbackup=async(req,res,next)=>{
       const {shopName,password,filePath,confirm_password}=req.body
-      const {authConnection} = require('../modals/AuthConnection');
       try{
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').Shop;
+        }else{
+            Data=require('../modals/Shop')
+        }    
+        //--------------------
 
         if(!shopName){throw {message:"Enter shopName"}}
   
@@ -598,13 +699,9 @@ const shopinit= async (req,res,next)=>{
         const fileName=`${date}_${month}_${year}_${temp[1]}.json`
         const fullPath=`${req.backupData}${fileName}`
 
-        //check ShopName,password
-        const {Shop,User}=require('../modals/Auth');           
-  
-        const result=await Shop.find({shopName}).lean()
+        const result=await Data.find({shopName}).lean()
         if(!result) {throw {message:'Invalid shop name'}}
         //authConnection.close()
-
 
         const obj={table:result}
         const json = JSON.stringify(obj);
@@ -633,11 +730,20 @@ const userinit= async (req,res,next)=>{
     //console.log('1')
     //console.log(req.routeAddress)
     console.log('userinit')
-    const {authConnection} = require('../modals/AuthConnection');
 
     const {shopName,password,confirm_password}=req.body
   
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
+
         if(!shopName){throw {message:"Enter shopName"}}
         if(!confirm_password)
             {return res.status(400).json("enter confirm_password") }
@@ -645,16 +751,14 @@ const userinit= async (req,res,next)=>{
             {return res.status(400).json("invalid confirm_password") }
   
         //let result = null
-  
-          const {User} = require('../modals/Auth')
-          let newData=new User({...req.initData,shopId:shopName});
+          let newData=new Data({...req.initData,shopId:shopName});
 
           if(req.initData.password){
               const hash_password=await bcrypt.hash(req.initData.password,10)
               newData.password=hash_password;
           }
           
-          const resDelete = await User.deleteMany({shopId:shopName})
+          const resDelete = await Data.deleteMany({shopId:shopName})
   
           const result=await newData.save()
           //console.log('4')
@@ -671,10 +775,18 @@ const userinit= async (req,res,next)=>{
   
   //get=>localhost:3001/*/restore
   const userrestore=async(req,res,next)=>{
-      const {authConnection} = require('../modals/AuthConnection');
-
       const {shopName,password,filePath,confirm_password}=req.body
       try{
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
 
          if(!shopName){throw {message:"Enter shopName"}}
          if(!filePath){throw {message:"Enter filePath"}}
@@ -683,9 +795,6 @@ const userinit= async (req,res,next)=>{
             {return res.status(400).json("enter confirm_password") }
          if(confirm_password!==process.env.CONFIRM_PASSWORD)
             {return res.status(400).json("invalid confirm_password") }
-
-         const {User}=require('../modals/Auth'); 
-         const Data=require(req.modal);
   
           const restoreData = require(`../data/${filePath}`)
   
@@ -696,9 +805,9 @@ const userinit= async (req,res,next)=>{
           //console.log(restoreData.table)
           if(Array.isArray(restoreData.table)){
              //console.log("2")
-             await User.deleteMany({shopId:shopName})   
+             await Data.deleteMany({shopId:shopName})   
              //console.log("3")
-             await User.create(restoreData.table)
+             await Data.create(restoreData.table)
              //authConnection.close()
              //console.log("4")
              return res.status(200).json({message:"restore User succesfully"})
@@ -718,9 +827,18 @@ const userinit= async (req,res,next)=>{
   //all backup to file
   const userbackup=async(req,res,next)=>{
       const {shopName,password,filePath,confirm_password}=req.body
-      const {authConnection} = require('../modals/AuthConnection');
 
       try{
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
 
         if(!shopName){throw {message:"Enter shopName"}}
     
@@ -737,11 +855,9 @@ const userinit= async (req,res,next)=>{
         const fileName=`${date}_${month}_${year}_${temp[1]}.json`
         const fullPath=`${req.backupData}${fileName}`
 
-          //check ShopName,password
+        //check ShopName,password
 
-        const {User}=require('../modals/Auth'); 
-
-        const result= await User.find({shopId:shopName}).lean()
+        const result= await Data.find({shopId:shopName}).lean()
         if(!result){throw {message:`Invalid ${temp[1]}`}}
         //authConnection.close()
 
@@ -772,11 +888,20 @@ const userinit= async (req,res,next)=>{
 //===================================
 const getuser=async(req,res,next)=>{
     //no shopId is required
-    const {authConnection} = require('../modals/AuthConnection');
     let {sort,confirm_password,shopName,...remaining}=req.body
     if(!sort){ sort={dateIn:1} }
 
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
+
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
@@ -785,9 +910,6 @@ const getuser=async(req,res,next)=>{
         {return res.status(400).json("enter shopName") }
 
         const qryObject={...remaining,shopId:shopName}
-
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).User;
 
         const count = Data.find(qryObject).lean().countDocuments()
         const lastRecord = Data.findOne({}).sort({dateIn:-1})
@@ -815,8 +937,6 @@ const getuser=async(req,res,next)=>{
 //--------------------------
 const getlimituser=async(req,res,next)=>{
     //no shopId is required
-    const {authConnection} = require('../modals/AuthConnection');
-
     let {pageNumber,sort,limitRow,shopName,confirm_password,...remaining}=req.body
 
     if(!limitRow){limitRow=10}
@@ -829,6 +949,16 @@ const getlimituser=async(req,res,next)=>{
     if(!sort){ sort={dateIn:1} }
 
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
+
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
@@ -836,9 +966,6 @@ const getlimituser=async(req,res,next)=>{
         if(!shopName)
         {return res.status(400).json("enter shopName") }
         const qryObject={...remaining,shopId:shopName}
-
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).User;
 
         const count = Data.find(qryObject).lean().countDocuments()
         const lastRecord = Data.findOne({}).sort({dateIn:-1})
@@ -867,24 +994,32 @@ const getlimituser=async(req,res,next)=>{
 const deleteuser=async(req,res,next)=>{
     //no shopId is required
     const {id,username,shopName,confirm_password}=req.body
-    const {authConnection} = require('../modals/AuthConnection');
 
     try{
+
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
+
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
         {return res.status(400).json("invalid confirm_password") }
-        console.log('1')
+        //console.log('1')
         if(!shopName)
         {return res.status(400).json("enter shopName") }
         if(!username)
         {return res.status(400).json("enter username") }
-        console.log('2')
+        //console.log('2')
         const qryObject={username,shopId:shopName}
 
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).User;
-        console.log('3')
+        //console.log('3')
         const resDelete = await Data.deleteMany(qryObject)
         
         //authConnection.close()
@@ -897,43 +1032,43 @@ const deleteuser=async(req,res,next)=>{
 }
 //.....................................
 const updateuser=async(req,res,next)=>{
-    console.log('0')
+    //console.log('0')
     const {_id,shopName,username,password,
                ownerName,ownerPassword,
                confirm_password,
            ...remaining}=req.body
     
-    const {authConnection} = require('../modals/AuthConnection');
-
     try{
+        //-------------------
+        //const {authConnection} = require('../modals/AuthConnection');
+        let Data    
+        if(process.env.AUTH_CONNECTION=="true"){
+            Data=require('../modals/Auth').User;
+        }else{
+            Data=require('../modals/User')
+        }    
+        //--------------------
         //check user shop
         if(password){ 
             throw {message:"No password update allowed"}
         }
-        console.log('2')
-
         if(!shopName)
         {return res.status(400).json("enter shopName") }
-        console.log('3')
         if(!username)        
         {return res.status(400).json("enter username") }
-        console.log('4')
         if(!confirm_password)
         {return res.status(400).json("enter confirm_password") }
         if(confirm_password!==process.env.CONFIRM_PASSWORD)
         {return res.status(400).json("invalid confirm_password") }
-        console.log('5')
         const qryObject={username,shopId:shopName}
 
         const dataTosave=remaining
-        //const {Shop} = require('../modals/Auth')
-        const Data=require(req.modal).User;
-        console.log('6')
+
         const resUpdate=await Data.updateOne(
             qryObject,
             {$set:{...dataTosave}}
         )
-        console.log('7')
+        //console.log('7')
         //authConnection.close()
         return res.status(200).json({message:"update user by username succesfully"})
     }

@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/fp/static/css/main.803e82dc.chunk.css",
+    "main.js": "/fp/static/js/main.7d1dde42.chunk.js",
+    "main.js.map": "/fp/static/js/main.7d1dde42.chunk.js.map",
+    "runtime-main.js": "/fp/static/js/runtime-main.74e3939d.js",
+    "runtime-main.js.map": "/fp/static/js/runtime-main.74e3939d.js.map",
+    "static/css/2.30e53678.chunk.css": "/fp/static/css/2.30e53678.chunk.css",
+    "static/js/2.6f45da60.chunk.js": "/fp/static/js/2.6f45da60.chunk.js",
+    "static/js/2.6f45da60.chunk.js.map": "/fp/static/js/2.6f45da60.chunk.js.map",
+    "index.html": "/fp/index.html",
+    "precache-manifest.3192fd53ea14bdda36c29907ce497294.js": "/fp/precache-manifest.3192fd53ea14bdda36c29907ce497294.js",
+    "service-worker.js": "/fp/service-worker.js",
+    "static/css/2.30e53678.chunk.css.map": "/fp/static/css/2.30e53678.chunk.css.map",
+    "static/css/main.803e82dc.chunk.css.map": "/fp/static/css/main.803e82dc.chunk.css.map",
+    "static/js/2.6f45da60.chunk.js.LICENSE.txt": "/fp/static/js/2.6f45da60.chunk.js.LICENSE.txt",
+    "static/media/App2.css": "/fp/static/media/icecream.96feb646.jpg",
+    "static/media/Home.css": "/fp/static/media/waterfall.e379c494.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.74e3939d.js",
+    "static/css/2.30e53678.chunk.css",
+    "static/js/2.6f45da60.chunk.js",
+    "static/css/main.803e82dc.chunk.css",
+    "static/js/main.7d1dde42.chunk.js"
+  ]
+}

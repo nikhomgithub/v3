@@ -11,6 +11,7 @@ services:
       - PORT=3004
       - JWT_SECRET=jwtSecret
       - CONFIRM_PASSWORD=server_27
+      - AUTH_CONNECTION=true
     volumes:
       - ./server/p27upload:/usr/src/app/p27upload
       - ../controllers:/usr/src/app/controllers

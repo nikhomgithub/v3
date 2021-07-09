@@ -1,12 +1,12 @@
 const  axios = require('axios')
 let myheader={headers: {'Content-Type': 'application/json'}}
- mainUrl="localhost"
+ mainUrl="vrpshop.net"
 
 const shoplogin = {shopName:"shopa",password:"shopa"}
 const userlogin = {username:"usera",password:"usera"}
 
-const init = {shopName:"shopa",confirm_password:"server_27"}
-const backup = {shopName:"shopa",confirm_password:"server_27"}
+const init = {shopName:"shopa",confirm_password:"vrpshop_server_27"}
+const backup = {shopName:"shopa",confirm_password:"vrpshop_server_27"}
 const restoretransaction = {shopName:"shopa",confirm_password:"server_27",filePath:"backupData/02_07_2021_transaction.json"}
 const restoretransactionlog = {shopName:"shopa",confirm_password:"server_27",filePath:"backupData/02_07_2021_transactionlog.json"}
 const restorepartner = {shopName:"shopa",confirm_password:"server_27",filePath:"backupData/02_07_2021_partner.json"}
@@ -43,7 +43,7 @@ const restorebasicdata = {shopName:"shopa",confirm_password:"server_27",filePath
         console.log(result1.data)
 
         //----------------------------------
-
+        /*
          result1= await axios.post(`http://${mainUrl}/p27transaction/backup`,backup,myheader)
         console.log('p27transaction/backup')
         console.log(result1.data)
@@ -92,6 +92,7 @@ const restorebasicdata = {shopName:"shopa",confirm_password:"server_27",filePath
          result1= await axios.post(`http://${mainUrl}/p27basicdata/restore`,restorebasicdata,myheader)
         console.log('p27basicdata/restore')
         console.log(result1.data)
+        */
 
     }
     catch (err){

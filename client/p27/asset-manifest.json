@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/p27/static/css/main.4a988093.chunk.css",
+    "main.js": "/p27/static/js/main.89382500.chunk.js",
+    "main.js.map": "/p27/static/js/main.89382500.chunk.js.map",
+    "runtime-main.js": "/p27/static/js/runtime-main.39fcfc6e.js",
+    "runtime-main.js.map": "/p27/static/js/runtime-main.39fcfc6e.js.map",
+    "static/css/2.30e53678.chunk.css": "/p27/static/css/2.30e53678.chunk.css",
+    "static/js/2.29516d3e.chunk.js": "/p27/static/js/2.29516d3e.chunk.js",
+    "static/js/2.29516d3e.chunk.js.map": "/p27/static/js/2.29516d3e.chunk.js.map",
+    "index.html": "/p27/index.html",
+    "precache-manifest.b361155078486a07bf264c705c463c5d.js": "/p27/precache-manifest.b361155078486a07bf264c705c463c5d.js",
+    "service-worker.js": "/p27/service-worker.js",
+    "static/css/2.30e53678.chunk.css.map": "/p27/static/css/2.30e53678.chunk.css.map",
+    "static/css/main.4a988093.chunk.css.map": "/p27/static/css/main.4a988093.chunk.css.map",
+    "static/js/2.29516d3e.chunk.js.LICENSE.txt": "/p27/static/js/2.29516d3e.chunk.js.LICENSE.txt",
+    "static/media/RenderModalError.bak": "/p27/static/media/RenderModalError.b0ec9a73.bak",
+    "static/media/App2.css": "/p27/static/media/icecream.96feb646.jpg",
+    "static/media/Home.css": "/p27/static/media/waterfall.e379c494.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.39fcfc6e.js",
+    "static/css/2.30e53678.chunk.css",
+    "static/js/2.29516d3e.chunk.js",
+    "static/css/main.4a988093.chunk.css",
+    "static/js/main.89382500.chunk.js"
+  ]
+}

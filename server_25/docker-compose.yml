@@ -11,6 +11,7 @@ services:
       - PORT=3003
       - JWT_SECRET=jwtSecret
       - CONFIRM_PASSWORD=server_25
+      - AUTH_CONNECTION=true
     volumes:
       - ./server/p25upload:/usr/src/app/p25upload
       - ../controllers:/usr/src/app/controllers

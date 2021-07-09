@@ -6,10 +6,11 @@ services:
     ports:
       - '3001:3001'
     environment:
-      - AUTH_MONGO_URI=mongodb://mongo_auth_v3:27017/v3
+      - MONGO_URI=mongodb://mongo_auth_v3:27017/v3
       - PORT=3001
       - JWT_SECRET=jwtSecret
-      - CONFIRM_PASSWORD=v3
+      - CONFIRM_PASSWORD=server_auth
+      - AUTH_CONNECTION=false
     volumes:
       - ./server/upload:/usr/src/app/upload
       - ../controllers:/usr/src/app/controllers

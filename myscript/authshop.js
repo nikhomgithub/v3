@@ -2,7 +2,7 @@ const axios = require('axios')
 let myheader={headers: {'Content-Type': 'application/json'}}
 const mainUrl="localhost"
 
-const shopinit={shopName:"shopa",confirm_password:"v3"}
+const shopinit={shopName:"shopa",confirm_password:"server_auth"}
 const shopsignup = {shopName:"shopb",password:"shopb",ownerName:"ownerb",ownerPassword:"ownerb",ownerEmail:"ownerb@mail.com"}
 const shoplogin = {shopName:"shopb",password:"shopb"}
 const shoplogin2 = {shopName:"shopb",password:"shopboy"}
@@ -13,15 +13,15 @@ const ownerlogin2 = {ownerName:"ownerb",ownerPassword:"ownerboy"}
 const shopchangepassword={shopName:"shopb",password:"shopb",newPassword1:"shopboy",newPassword2:"shopboy"}
 const ownerchangepassword={ownerName:"ownerb",ownerPassword:"ownerb",newOwnerPassword1:"ownerboy",newOwnerPassword2:"ownerboy"}
 
-const getshop={confirm_password:"v3"}
-const getlimitshop={confirm_password:"v3"}
+const getshop={confirm_password:"server_auth"}
+const getlimitshop={confirm_password:"server_auth"}
 
-const deleteshop={shopName:"shopb",confirm_password:"v3"}
-const updateshop={shopName:"shopb",confirm_password:"v3",ownerEmail:"aaaaaa"}
+const deleteshop={shopName:"shopb",confirm_password:"server_auth"}
+const updateshop={shopName:"shopb",confirm_password:"server_auth",ownerEmail:"aaaaaa"}
 
 
-const shopbackup={shopName:"shopb",confirm_password:"v3"}
-const shoprestore={shopName:"shopb",confirm_password:"v3",filePath:"backupData/01_07_2021_shop.json"}
+const shopbackup={shopName:"shopb",confirm_password:"server_auth"}
+const shoprestore={shopName:"shopb",confirm_password:"server_auth",filePath:"backupData/01_07_2021_shop.json"}
 
 
 const getStart = async()=>{

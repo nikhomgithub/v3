@@ -76,7 +76,7 @@ phone         :
 { lb:'โทรศัพท์', type:"array",
   width:120,   showCol:true,  showColHead:true,      
 },
-groupName      :
+partnerType      :
 { lb:'ประเภทคู่ค้า',type:"string",
   width:70,   showCol:true,  showColHead:true,      
 },    

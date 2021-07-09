@@ -66,14 +66,18 @@ const restore=async(req,res,next)=>{
 
         const restoreData = require(`../data/${filePath}`)
 
+        console.log('1')
+
         if(!restoreData){throw {message:"Invalid file"} }
         if(!restoreData.table){throw {message:"Wrong filePath"} }
         //end check
         //console.log(restoreData.table)
         if(Array.isArray(restoreData.table)){
-
+            console.log('2')
             await Data.deleteMany({shopId:shopName})     
+            console.log('3')
             await Data.create(restoreData.table)
+            console.log('4')
             return res.status(200).json({message:"restore succesfully"})
             
         }
@@ -297,20 +301,26 @@ const deleteall=async(req,res,next)=>{
 //if delete user, tableTemplate get delete as well
 const deletecustom=async(req,res,next)=>{
     
-    const Data=require(req.modal);
     const shopId=req.shopId
-
     const {id}=req.body
 
     try{
         if(req.routeAddress=="/user/deletecustom"){
-            const Data=require(req.modal).User;
+            let Data    
+            if(process.env.AUTH_CONNECTION=="true"){
+                Data=require('../modals/Auth').User;
+            }else{
+                Data=require('../modals/User')
+            }  
+            
             await Data.deleteMany({id,shopId})
             const TableTemplate=require('../modals/TableTemplate'); 
             await TableTemplate.deleteMany({id,shopId})
             return res.status(200).json({message:"delete custom User succesfully"})
         }
         else {
+            const Data=require(req.modal);
+
             await Data.deleteMany({id,shopId})
             return res.status(200).json({message:"delete custom succesfully"})
         }

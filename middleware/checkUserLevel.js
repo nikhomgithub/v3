@@ -1,7 +1,4 @@
 const BasicData=require('../modals/BasicData');
-//const User=require('../modals/User');
-const {User} = require('../modals/Auth')
-const {authConnection} = require('../modals/AuthConnection');
 
 const jwt = require('jsonwebtoken');
 
@@ -9,6 +6,14 @@ const checkUserLevel =()=>{
     console.log('checkUserLevel')
     return async (req,res,next)=>{
         try{
+              
+                let User    
+                if(process.env.AUTH_CONNECTION=="true"){
+                    User=require('../modals/Auth').User;
+                }else{
+                    User=require('../modals/User')
+                }  
+
               //console.log(req.headers)
               if(!req.headers.userauthorization){throw {message:`Unauthorized-user1`}}
               

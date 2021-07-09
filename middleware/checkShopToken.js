@@ -1,13 +1,17 @@
-//const Shop=require('../modals/Shop');
-const {Shop} = require('../modals/Auth')
-const {authConnection} = require('../modals/AuthConnection');
-
 const jwt = require('jsonwebtoken');
 
 const checkShopToken = ()=>{
 
     return async (req,res,next)=>{
         try {
+
+            let Shop    
+            if(process.env.AUTH_CONNECTION=="true"){
+                Shop=require('../modals/Auth').Shop;
+            }else{
+                Shop=require('../modals/Shop')
+            }  
+
             //console.log(req.headers)
             if(!req.headers.shopauthorization){
                 throw {message:`Unauthorized-shop1`}
